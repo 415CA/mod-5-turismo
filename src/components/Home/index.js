@@ -1,8 +1,8 @@
 import React from 'react';
 import { compose } from 'recompose';
 
-import { withAuthorization, withEmailVerification } from '../Session';
-import Messages from '../Messages';
+import { withAuthorization, withEmailVerification } from '../Authentication/Session';
+import Messages from '../Authentication/Messages';
 
 const HomePage = () => (
   <div>
