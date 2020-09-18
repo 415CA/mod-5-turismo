@@ -54,7 +54,7 @@ const NavigationAuth = ({ authUser }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="transparent">
         <Toolbar>
           <IconButton
             edge="start"
@@ -117,7 +117,7 @@ const NavigationNonAuth = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="transparent">
         <Toolbar>
           <IconButton
             edge="start"

@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Navigation from '../Authentication/Navigation';
-import LandingPage from '../Authentication/Landing';
+import LandingPage from '../Landing';
 import SignUpPage from '../Authentication/SignUp';
 import SignInPage from '../Authentication/SignIn';
 import PasswordForgetPage from '../Authentication/PasswordForget';
-import HomePage from '../Authentication/Home';
+import HomePage from '../Home';
 import AccountPage from '../Authentication/Account';
 import AdminPage from '../Authentication/Admin';
 
