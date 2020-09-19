@@ -2,14 +2,15 @@ import React from 'react';
 import { compose } from 'recompose';
 
 import { withAuthorization, withEmailVerification } from '../Authentication/Session';
-import Messages from '../Authentication/Messages';
+
+import Search from '../Search'
 
 const HomePage = () => (
   <div>
     <h1>Home Page</h1>
     <p>The Home Page is accessible by every signed in user.</p>
 
-    <Messages />
+    <Search />
   </div>
 );
 

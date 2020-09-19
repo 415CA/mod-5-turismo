@@ -109,13 +109,19 @@ class PasswordForgetFormBase extends Component {
     }));
 
     return (
+      <>
+      <br></br>
+      <CssBaseline />
+      <Typography component="h1" variant="h5">
+        Forgot Password?
+      </Typography>
       <form
         onSubmit={this.onSubmit}
         className={useStyles.form}
         noValidate
       >
         <TextField
-          variant="outlined"
+          variant="standard"
           margin="normal"
           required
           fullWidth
@@ -139,6 +145,7 @@ class PasswordForgetFormBase extends Component {
         </Button>
         {error && <p>{error.message}</p>}
       </form>
+      </>
     );
   }
 }

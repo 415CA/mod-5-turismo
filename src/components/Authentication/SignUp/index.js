@@ -15,7 +15,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 // import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+// import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -170,7 +170,7 @@ class SignUpFormBase extends Component {
               name="username"
               value={username}
               onChange={this.onChange}
-              variant="outlined"
+              variant="standard"
               required
               fullWidth
               id="username"
@@ -185,7 +185,7 @@ class SignUpFormBase extends Component {
               name="email"
               value={email}
               onChange={this.onChange}
-              variant="outlined"
+              variant="standard"
               required
               fullWidth
               id="email"
@@ -200,7 +200,7 @@ class SignUpFormBase extends Component {
               name="passwordOne"
               value={passwordOne}
               onChange={this.onChange}
-              variant="outlined"
+              variant="standard"
               required
               fullWidth
               id="passwordOne"
@@ -215,7 +215,7 @@ class SignUpFormBase extends Component {
               name="passwordTwo"
               value={passwordTwo}
               onChange={this.onChange}
-              variant="outlined"
+              variant="standard"
               required
               fullWidth
               id="passwordTwo"

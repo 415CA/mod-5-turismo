@@ -133,7 +133,7 @@ class SignInFormBase extends Component {
         noValidate
       >
         <TextField
-          variant="outlined"
+          variant="standard"
           margin="normal"
           required
           fullWidth
@@ -146,7 +146,7 @@ class SignInFormBase extends Component {
           onChange={this.onChange}
         />
         <TextField
-          variant="outlined"
+          variant="standard"
           margin="normal"
           required
           fullWidth

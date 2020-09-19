@@ -21,6 +21,9 @@ import HomeIcon from '@material-ui/icons/Home';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
+// Geolocation
+import CurrentLocation from '../../Geolocation'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -51,6 +54,7 @@ const NavigationAuth = ({ authUser }) => {
   const handleClickLanding = () => history.push(ROUTES.LANDING);
   const handleClickAccount = () => history.push(ROUTES.ACCOUNT);
   const handleClickHome = () => history.push(ROUTES.HOME);
+  const location = CurrentLocation();
 
   return (
     <div className={classes.root}>
@@ -69,6 +73,7 @@ const NavigationAuth = ({ authUser }) => {
             variant="h6"
             className={classes.title}
             onClick={handleClickLanding}
+            location={location}
           >
             Turismo
           </Typography>
@@ -79,6 +84,7 @@ const NavigationAuth = ({ authUser }) => {
             color="inherit"
             aria-label="menu"
             onClick={handleClickHome}
+            location={location}
           >
             <HomeIcon />
           </IconButton>
@@ -89,6 +95,7 @@ const NavigationAuth = ({ authUser }) => {
             color="inherit"
             aria-label="menu"
             onClick={handleClickAccount}
+            location={location}
           >
             <AccountCircleIcon />
           </IconButton>
