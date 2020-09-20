@@ -1,55 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment } from 'react';
+import { MediaGrid } from '../Cards'
+import {HeroImage, HeroUnit} from '../Images'
 
-import MediaCard from './MediaCard';
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-import Grid from '@material-ui/core/Grid';
-
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
-// import Typography from '@material-ui/core/Typography';
-import HeroImage from './HeroImage'
-import { Typography } from '@material-ui/core';
-
-const Landing = (props) => {
-
+const Landing = () => {
   return (
-    <div>
-      <CssBaseline />
-      <HeroImage />
-      <br></br>
-      <Container maxWidth="lg">
-        <Typography variant="h5" component="h5">
-          Explore Destinations
-        </Typography>
-        <hr></hr>
-      </Container>
-      <br></br>
-      <Container maxWidth="lg">
-        <Grid
-          container
-          direction="row"
-          // justify="center"
-          alignItems="flex-start"
-          spacing={1}
-        >
-          <Grid item>
-            <MediaCard />
-          </Grid>
-          <Grid item>
-            <MediaCard />
-          </Grid>
-          <Grid item>
-            <MediaCard />
-          </Grid>
-        </Grid>
-      </Container>
-      <Container maxWidth="lg">
-        <Typography variant="h5" component="h5">
-          Explore Destinations
-        </Typography>
-        <hr></hr>
-      </Container>
-    </div>
+    <Fragment>
+        <HeroImage />
+        <HeroUnit />
+        <MediaGrid destinations={cards} />
+    </Fragment>
   );
 }
 

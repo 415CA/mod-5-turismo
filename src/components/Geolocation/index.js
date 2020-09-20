@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const CurrentLocation = () => {
     const [location, setLocation] = useState({});
@@ -18,8 +18,7 @@ const CurrentLocation = () => {
       }
       getLocation();
     }, []);
-    console.log('Location', location);
-
+    
     return location;
 };
 

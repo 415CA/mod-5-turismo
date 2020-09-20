@@ -45,7 +45,7 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <p>Search</p>
+        <p>Search Destinations</p>
         <form onSubmit={this.onSearch}>
           <input type="text" onChange={this.onChange} />
           <button type="submit">Search</button>

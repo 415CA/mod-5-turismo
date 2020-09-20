@@ -5,14 +5,16 @@ import { withAuthorization, withEmailVerification } from '../Authentication/Sess
 
 import Search from '../Search'
 
-const HomePage = () => (
-  <div>
-    <h1>Home Page</h1>
-    <p>The Home Page is accessible by every signed in user.</p>
+const HomePage = () => {
 
-    <Search />
-  </div>
-);
+  return (
+    <div>
+      <h1>Home Page</h1>
+      <p>The Home Page is accessible by every signed in user.</p>
+      <Search />
+    </div>
+  )
+};
 
 const condition = authUser => !!authUser;
 
