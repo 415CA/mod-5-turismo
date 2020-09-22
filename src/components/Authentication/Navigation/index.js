@@ -24,6 +24,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // Geolocation
 import CurrentLocation from '../../Geolocation'
 
+import Search from '../../Axios/Components/Search'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,

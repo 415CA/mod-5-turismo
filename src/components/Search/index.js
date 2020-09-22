@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 class Search extends React.Component {
   constructor(props) {
@@ -26,12 +28,11 @@ class Search extends React.Component {
       this.setState({ hits: JSON.parse(cachedHits) });
     } else {
       fetch(
-        `https://gateway.marvel.com:443/v1/public/characters?name=${query}&apikey=${process.env.REACT_APP_MARVEL}&callback=callback_param`,
-      )
+        `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCmff9SEPo4RoHnPck_uknQyVDBHzOQQ8o&address=${query}&inputtype=textquery&language=en`)
         .then((response) => response.json())
         .then((result) => {
           console.log(result);
-          // this.onSetResult(result, query)
+          this.onSetResult(result, query)
         });
     }
   };
@@ -40,20 +41,33 @@ class Search extends React.Component {
     localStorage.setItem(key, JSON.stringify(result.hits));
 
     this.setState({ hits: result.hits });
+      console.log(this.state.hits);
+
   };
+
 
   render() {
     return (
       <div>
-        <p>Search Destinations</p>
         <form onSubmit={this.onSearch}>
-          <input type="text" onChange={this.onChange} />
-          <button type="submit">Search</button>
+          <TextField
+            type="text"
+            onChange={this.onChange}
+            autoComplete="search"
+            name="search"
+            variant="standard"
+            required
+            id="search"
+            label="Search Destinations"
+            autoFocus
+          />
+          <br></br>
+          <Button type="submit">Search</Button>
         </form>
-        
-        {this.state.hits.map((item) => (
+
+        {/* {this.state.hits.map((item) => (
           <div key={item.objectID}>{item.title}</div>
-        ))}
+        ))} */}
       </div>
     );
   }

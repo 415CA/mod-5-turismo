@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { compose } from 'recompose';
-
 import { withAuthorization, withEmailVerification } from '../Authentication/Session';
-
-import Search from '../Search'
+import Search from '../Axios/Components/Search'
 
 const HomePage = () => {
 
@@ -13,7 +11,7 @@ const HomePage = () => {
       <p>The Home Page is accessible by every signed in user.</p>
       <Search />
     </div>
-  )
+  );
 };
 
 const condition = authUser => !!authUser;

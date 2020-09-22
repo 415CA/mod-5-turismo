@@ -21,9 +21,11 @@
     "react-open-weather-widget": "^1.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-slick": "^0.27.11",
     "recompose": "^0.30.0",
     "styled-components": "^5.2.0",
     "unsplash-js": "^6.3.0",
+    "use-data-api": "^1.0.1",
     "use-places-autocomplete": "^1.5.0",
     "use-position": "0.0.7",
     "yelp-fusion": "^3.0.0"
