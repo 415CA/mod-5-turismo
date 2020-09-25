@@ -10,37 +10,72 @@ import Link from '@material-ui/core/Link';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
+import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import CardHeader from '@material-ui/core/CardHeader';
+import { red } from '@material-ui/core/colors';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+
 const useStyles = makeStyles((theme) => ({
-  mainFeaturedPost: {
-    position: 'relative',
-    backgroundColor: theme.palette.grey[800],
-    color: theme.palette.common.white,
-    marginBottom: theme.spacing(4),
-    backgroundImage: 'url(https://source.unsplash.com/random)',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
+  // mainFeaturedPost: {
+  //   position: 'relative',
+  //   backgroundColor: theme.palette.grey[800],
+  //   color: theme.palette.common.white,
+  //   marginBottom: theme.spacing(4),
+  //   backgroundImage: 'url(https://source.unsplash.com/random)',
+  //   backgroundSize: 'cover',
+  //   backgroundRepeat: 'no-repeat',
+  //   backgroundPosition: 'center',
+  // },
+  // overlay: {
+  //   position: 'absolute',
+  //   top: 0,
+  //   bottom: 0,
+  //   right: 0,
+  //   left: 0,
+  //   backgroundColor: 'rgba(0,0,0,.3)',
+  // },
+  // mainFeaturedPostContent: {
+  //   position: 'relative',
+  //   padding: theme.spacing(3),
+  //   [theme.breakpoints.up('md')]: {
+  //     padding: theme.spacing(6),
+  //     paddingRight: 0,
+  //   },
+  // },
+  cardGrid: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
   },
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    backgroundColor: 'rgba(0,0,0,.3)',
+  card: {
+    maxWidth: 345,
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
   },
-  mainFeaturedPostContent: {
-    position: 'relative',
-    padding: theme.spacing(3),
-    [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(6),
-      paddingRight: 0,
-    },
+  cardMedia: {
+    height: 0,
+    paddingTop: '56.25%',
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+  avatar: {
+    backgroundColor: red,
   },
 }));
 
 const Yelp = (search) => {
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(false);
   const [listings, setListings] = useState([]);
   const query = search.destination;
 
@@ -55,9 +90,11 @@ const Yelp = (search) => {
 
   useEffect(() => {
     async function getListings() {
+      setIsLoading(true);
       const request = await axios(config)
         .then(function (response) {
           setListings(response.data.businesses);
+          setIsLoading(false);
         })
         .catch(function (error) {
           console.log(error);
@@ -67,58 +104,92 @@ const Yelp = (search) => {
     getListings();
   }, []);
 
-  const disListings = () => {
-    let displayListings;
-    if (listings) {
-      displayListings = listings.map((listing) => {
-        return (
-          <Paper
-            key={listing.id}
-            className={classes.mainFeaturedPost}
-            style={{ backgroundImage: `url(${listing.image_url})` }}
-          >
-            {/* Increase the priority of the hero background image */}
-            {
-              <img
-                style={{ display: 'none' }}
-                src={listing.image_url}
-                alt={listing.name}
-              />
-            }
-            <div className={classes.overlay} />
-            <Grid container>
-              <Grid item md={6}>
-                <div className={classes.mainFeaturedPostContent}>
-                  <Typography
-                    component="h1"
-                    variant="h3"
-                    color="inherit"
-                    gutterBottom
-                  >
-                    {listing.name}
-                  </Typography>
-                  <Typography variant="h5" color="inherit" paragraph>
-                    {listing.display_address}
-                  </Typography>
-                  <Link variant="subtitle1" href={listing.url}>
-                    Explore
-                  </Link>
-                </div>
-              </Grid>
-            </Grid>
-          </Paper>
-        );
-      });
-    }
-    return displayListings;
+  const truncate = (description, n) => {
+    return description?.length > n
+      ? description.substr(0, n - 1) + '...'
+      : description;
+  };
+
+  const truncateAvatar = (description, n) => {
+    return description?.length > n
+      ? description.substr(0, n - 0)
+      : description;
   };
 
   return (
     <div className={classes.root}>
-      <h2>Yelp</h2>
-      <Grid item xs={12} md={6}>
-        {disListings()}
-      </Grid>
+      <Container
+        className={classes.cardGrid}
+        maxWidth="md"
+      >
+        <Grid container spacing={2}>
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            listings.map((listing) => {
+              return (
+                <Grid item xs={12} sm={6} md={4}>
+                  <Card className={classes.card}>
+                    <CardActionArea
+                      href={listing.url}
+                      target="_blank"
+                    >
+                      <CardHeader
+                        avatar={
+                          <Avatar
+                            aria-label="recipe"
+                            className={classes.avatar}
+                          >
+                            {truncateAvatar(listing.name, 1)}
+                          </Avatar>
+                        }
+                        action={
+                          <IconButton aria-label="settings">
+                            <MoreVertIcon />
+                          </IconButton>
+                        }
+                        title={truncate(listing.name, 20)}
+                        subheader={
+                          listing.price
+                            ? `Rating: ${listing.rating} | Price ${listing.price}`
+                            : `Rating: ${listing.rating}`
+                        }
+                      />
+                      <CardMedia
+                        className={classes.cardMedia}
+                        image={listing.image_url}
+                        title={truncate(listing.name, 20)}
+                      />
+                      <CardContent className={classes.cardContent}>
+                        <Typography
+                          gutterBottom
+                          variant="h5"
+                          component="h5"
+                        >
+                          {truncate(listing.name, 20)}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          {listing.categories.length > 1
+                            ? listing.categories.map((category) => {
+                                return `${category.title} `;
+                              })
+                            : listing.categories.map((category) => {
+                                return category.title;
+                              })}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              );
+            })
+          )}
+        </Grid>
+      </Container>
     </div>
   );
 };

@@ -1,4 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+
 import axios from 'axios';
 
 import List from '@material-ui/core/List';
@@ -10,8 +12,22 @@ import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: '36ch',
+    backgroundColor: theme.palette.background.paper,
+  },
+  inline: {
+    display: 'inline',
+  },
+}));
 
 const NYTimes = (search) => {
+  const classes = useStyles();
+
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,8 +59,12 @@ const NYTimes = (search) => {
       <List>
         {articles.map((article) => {
           return (
-            <Fragment key={article.id}>
-              <ListItem alignItems="flex-start" key={article.id}>
+            <Fragment key={article.abstract}>
+              <ListItem
+                alignItems="flex-start"
+                dense={true}
+                divider={true}
+              >
                 <ListItemAvatar>
                   <Avatar
                     alt="NYTimes"
@@ -52,7 +72,21 @@ const NYTimes = (search) => {
                   />
                 </ListItemAvatar>
                 <ListItemText primary={article.headline.main} />
-                <ListItemText primary={article.abstract} />
+                <br></br>
+                <ListItemText
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}
+                        color="textSecondary"
+                      >
+                        {article.abstract}
+                      </Typography>
+                    </React.Fragment>
+                  }
+                />
                 <React.Fragment>
                   <IconButton
                     aria-label="read"

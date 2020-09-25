@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
   },
   gridList: {
     flexWrap: 'nowrap',
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
   },
   title: {
@@ -96,7 +95,7 @@ const Unsplash = (search) => {
       <GridList
         className={classes.gridList}
         cols={2.5}
-        cellHeight={160}
+        cellHeight={400}
       >
         {disPhotos()}
       </GridList>

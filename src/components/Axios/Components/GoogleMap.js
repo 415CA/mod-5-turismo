@@ -1,8 +1,41 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
-// import { GoogleMap, Marker } from 'react-google-maps';
+// import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Container from '@material-ui/core/Container';
+
+const useStyles = makeStyles((theme) => ({
+  mapResponsive: {
+    overflow: 'hidden',
+    paddingBottom: '56.25%',
+    position: 'relative',
+    height: 0,
+  },
+  mapResponsiveiframe: {
+    left: 0,
+    top: 0,
+    height: '100%',
+    width: '100%',
+    position: 'absolute',
+  },
+  mainFeaturedPost: {
+    position: 'relative',
+    backgroundColor: theme.palette.grey[800],
+    color: theme.palette.common.white,
+    marginBottom: theme.spacing(4),
+    // backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    rounded: true,
+  },
+}));
+
 
 const GoogleMap = (search) => {
+    const classes = useStyles();
+
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const query = search.destination;
@@ -10,14 +43,24 @@ const GoogleMap = (search) => {
 
   return (
     <Fragment>
-      <div id="map"></div>
-      <iframe
-        width="450"
-        height="600"
-        frameborder="0"
-        src={`https://www.google.com/maps/embed/v1/search?key=${GOOGLE}&q=${query}`}
-        allowfullscreen
-      ></iframe>
+      <Container>
+        <Paper
+          className={classes.mainFeaturedPost}
+          elevation={3}
+
+        >
+          <div id="map" className={classes.mapResponsive}>
+            <iframe
+              className={classes.mapResponsiveiframe}
+              // width="450"
+              // height="600"
+              frameborder="0"
+              src={`https://www.google.com/maps/embed/v1/search?key=${GOOGLE}&q=${query}`}
+              allowfullscreen
+            ></iframe>
+          </div>
+        </Paper>
+      </Container>
     </Fragment>
   );
 };
