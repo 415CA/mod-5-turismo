@@ -1,42 +1,33 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-
 import axios from 'axios';
-
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
-import BookmarkIcon from '@material-ui/icons/Bookmark';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: '36ch',
-    backgroundColor: theme.palette.background.paper,
-  },
-  inline: {
-    display: 'inline',
-  },
-}));
+import {
+  Typography,
+  Divider,
+  Card,
+  CardHeader,
+  CardActionArea,
+  CardActions,
+  Avatar,
+  IconButton,
+} from '@material-ui/core';
+import NearMeIcon from '@material-ui/icons/NearMe';
 
 const NYTimes = (search) => {
-  const classes = useStyles();
+  const truncate = (description, n) => {
+    return description?.length > n
+      ? description.substr(0, n - 1) + '...'
+      : description;
+  };
 
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const NYTIMES = process.env.REACT_APP_NYTIMES;
+  const NYTIMES_API_KEY = process.env.REACT_APP_NYTIMES;
   const destination = search.destination;
 
   const config = {
     method: 'get',
-    url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${destination}&fq=news_desk:("Travel")ANDglocations:(${destination})&api-key=${NYTIMES}`,
+    url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${destination}&fq=news_desk:("Travel")ANDglocations:(${destination})&api-key=${NYTIMES_API_KEY}`,
   };
 
   useEffect(() => {
@@ -55,57 +46,47 @@ const NYTimes = (search) => {
 
   return (
     <div>
-      <h2>NY Times</h2>
-      <List>
+      <Card outlined raised={true} style={{ width: '30rem' }}>
+        <CardHeader
+          avatar={
+            <Avatar
+              alt="NYTimes"
+              src="https://d24wuq6o951i2g.cloudfront.net/img/events/id/457/457735294/assets/bea.NYT-logo-2.png"
+            />
+          }
+          display="inline"
+          subheader={
+            <Typography
+              use="subtitle1"
+              tag="div"
+              style={{ padding: '1rem 1rem' }}
+              align="justify"
+            >
+              New York Times Travel
+            </Typography>
+          }
+        />
+        <Divider />
         {articles.map((article) => {
           return (
-            <Fragment key={article.abstract}>
-              <ListItem
-                alignItems="flex-start"
-                dense={true}
-                divider={true}
+            <Fragment key={article.id} >
+              <CardActionArea
+                onClick={() => window.open(article.web_url, '_blank')}
               >
-                <ListItemAvatar>
-                  <Avatar
-                    alt="NYTimes"
-                    src="https://d24wuq6o951i2g.cloudfront.net/img/events/id/457/457735294/assets/bea.NYT-logo-2.png"
-                  />
-                </ListItemAvatar>
-                <ListItemText primary={article.headline.main} />
-                <br></br>
-                <ListItemText
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}
-                        color="textSecondary"
-                      >
-                        {article.abstract}
-                      </Typography>
-                    </React.Fragment>
-                  }
-                />
-                <React.Fragment>
-                  <IconButton
-                    aria-label="read"
-                    onClick={() =>
-                      window.open(article.web_url, '_blank')
-                    }
-                  >
-                    <LocalLibraryIcon />
-                  </IconButton>
-                  <IconButton aria-label="bookmark">
-                    <BookmarkIcon />
-                  </IconButton>
-                </React.Fragment>
-              </ListItem>
-              <Divider variant="inset" component="div" />
+                <div style={{ padding: '1rem' }}>
+                  <Typography use="headline5" tag="div">
+                    <b>{truncate(article.headline.main, 50)}</b>
+                  </Typography>
+                  <Typography use="body1" tag="p">
+                    {truncate(article.abstract, 60)}
+                  </Typography>
+                </div>
+              </CardActionArea>
+              <Divider />
             </Fragment>
           );
         })}
-      </List>
+      </Card>
     </div>
   );
 };

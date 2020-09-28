@@ -1,81 +1,62 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import axios from 'axios';
-
+import React, { useEffect, useState, Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+import dayjs from 'dayjs';
+import moment from 'moment';
+
 import {
-  Paper,
+  Typography,
   Card,
   CardHeader,
+  CardActionArea,
+  CardActions,
   CardContent,
-  CardMedia,
-  Divider,
-  Header,
+  Grid,
+  Container,
 } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import dayjs from 'dayjs';
-
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
-  atmospheric: {
-    fontSize: '28px',
-    padding: '5px',
+  root: {
+    marginRight: 32,
   },
-  buttons: {
-    color: 'black',
+  card: {
+    minWidth: 275,
+    marginBottom: 16,
   },
-  // card: {
-  //   minWidth: 600,
-  //   minHeight: 600,
-  // },
-  container: {
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    marginBottom: 16,
+    fontSize: 14,
+    color: theme.palette.text.secondary,
+  },
+  pos: {
+    marginBottom: 12,
+    color: theme.palette.text.secondary,
+  },
+  flex: {
     display: 'flex',
     flexWrap: 'wrap',
   },
-  error: {
-    color: 'red',
-    padding: '10px',
+  space: {
+    marginRight: 8,
   },
-  fullList: {
-    width: 'auto',
-  },
-  layout: {
-    marginTop: '10px',
-  },
-
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  recommendation: {
-    fontFamily: 'Montserrat, sans-serif',
-    padding: '20px 0px 10px 0px',
-    fontSize: '26px',
-    textAlign: 'center',
-  },
-  root: {
-    flexiGrow: 1,
-    color: 'black',
-  },
-  search: {
-    marginTop: '100px',
-  },
-  wi: {
-    color: '#673ab7',
+  daily: {
+    justifyContent: 'space-between',
+    display: 'flex',
+    marginRight: 32,
   },
 }));
 
 const Weather = (search) => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
-
   const [weatherToday, setWeatherToday] = useState({});
   const [weatherDaily, setWeatherDaily] = useState({});
-  const [weatherHash, setWeatherHash] = useState({});
+  const [weather, setWeather] = useState({});
   const query = search.destination;
   const name = search.name;
   const longitude = search.longitude;
@@ -98,7 +79,7 @@ const Weather = (search) => {
         .then((response) => {
           setWeatherToday(response.data.current);
           setWeatherDaily(response.data.daily);
-          setWeatherHash({
+          setWeather({
             dateTime: response.data.current.dt,
             feelsLike: response.data.current.feels_like,
             temperature: response.data.current.temp,
@@ -106,9 +87,13 @@ const Weather = (search) => {
             sunrise: response.data.current.sunrise,
             sunset: response.data.current.sunset,
             humidity: response.data.current.humidity,
-            description: response.data.current.weather[0].main,
+            description: response.data.current.weather[0].description,
             icon: response.data.current.weather[0].id,
             timezone: response.data.current.timezone,
+            timezoneOffset: response.data.current.timezone_offset,
+            windDegree: response.data.current.wind_deg,
+            cloudiness: response.data.current.clouds,
+            pressure: response.data.current.pressure,
           });
           setIsLoading(false);
         })
@@ -120,87 +105,141 @@ const Weather = (search) => {
     getWeather();
   }, [weatherConfig.url]);
 
-  const iconClass = `wi wi-owm-${weatherHash.icon}`;
+  const iconClass = `wi wi-owm-${weather.icon}`;
 
   // <i className={iconClass} style={{ fontSize: '100px' }}></i>;
 
+  const today = new Date(
+    weather.dateTime * 1000 - weather.timezoneOffset * 60000,
+  );
+  const now = new Date();
+
   return (
-    <div className={classes.root}>
-      <h2>Weather</h2>
-      {isLoading ? (
-        <div>Loading ...</div>
-      ) : (
-        <Fragment>
-          <Container maxWidth="sm">
-            <Card className={classes.card} >
-              <CardHeader
-                title={name}
-                subheader={
-                  <span>
-                    {dayjs
-                      .unix(weatherHash.dateTime)
-                      .tz(weatherHash.timezone)
-                      .format('dddd')}
-                    ,{' '}
-                    {dayjs
-                      .unix(weatherHash.dateTime)
-                      .tz(weatherHash.timezone)
-                      .format('h:mm')}{' '}
-                    {dayjs
-                      .unix(weatherHash.dateTime)
-                      .tz(weatherHash.timezone)
-                      .format('A')}
-                  </span>
-                }
-              />
-              <CardContent>
-                <CardMedia>
-                  <i
-                    className={iconClass}
-                    style={{ fontSize: '128px', float: 'right' }}
-                  ></i>
-                </CardMedia>
-                <span>
-                  <Typography
-                    variant="h2"
-                    color="textPrimary"
-                    component="h2"
-                    style={{
-                      fontFamily: 'Montserrat',
-                      paddingTop: '10px',
-                    }}
-                  >
-                    {Math.round(weatherHash.temperature)}&deg;F
-                  </Typography>
-                  <Grid container justify="center">
+    <div>
+      <Container maxWidth="md">
+        <Card outlined raised={true}>
+          <CardContent>
+            <Grid
+              container
+              spacing={5}
+              direction="row"
+              justify="center"
+              alignItems="center"
+              alignContent="center"
+            >
+              <Grid item>
+                <CardHeader
+                  title={
                     <Typography
-                      variant="subtitle2"
-                      className="atmospheric-conditions"
-                      color="textSecondary"
-                      style={{ paddingTop: '10px' }}
+                      type="display3"
+                      variant="h2"
+                      color="textPrimary"
+                      component="h2"
+                      style={{
+                        fontFamily: 'Montserrat',
+                        paddingTop: '10px',
+                      }}
                     >
-                      <span>
-                        <CardMedia>
-                          <i
-                            className={'wi wi-owm-f050'}
-                            style={{ fontSize: '20px' }}
-                          ></i>
-                          {weatherHash.windSpeed} mph Winds
-                        </CardMedia>
-                        <i
-                          className={'wi wi-owm-f07a'}
-                          style={{ fontSize: '20px' }}
-                        ></i>
-                        {weatherHash.humidity}% Humidity
-                      </span>
+                      {name}
                     </Typography>
-                  </Grid>
-                </span>
-              </CardContent>
-            </Card>
-          </Container>
-        </Fragment>
-      )}
+                  }
+                ></CardHeader>
+              </Grid>
+              <Grid
+                item
+                spacing={1}
+                direction="row"
+                justify="center"
+                alignItems="center"
+                alignContent="center"
+                wrap="nowrap"
+              >
+                <div className={classes.root}>
+                  <div className={classes.flex}>
+                    <Typography
+                      type="display1"
+                      className={classes.space}
+                    >
+                      Humidity:
+                    </Typography>
+                    <Typography type="display1">
+                      {`${weather.humidity}%`}
+                    </Typography>
+                  </div>
+
+                  <div className={classes.flex}>
+                    <Typography
+                      type="display1"
+                      className={classes.space}
+                    >
+                      Wind:
+                    </Typography>
+                    <Typography type="display1">
+                      {`${weather.windSpeed} mph ${weather.windDegree}°`}
+                    </Typography>
+                  </div>
+
+                  <div className={classes.flex}>
+                    <Typography
+                      type="display1"
+                      className={classes.space}
+                    >
+                      Cloudiness:
+                    </Typography>
+                    <Typography type="display1">
+                      {`${weather.cloudiness} %`}
+                    </Typography>
+                  </div>
+                  <div className={classes.flex}>
+                    <Typography
+                      type="display1"
+                      className={classes.space}
+                    >
+                      Pressure:
+                    </Typography>
+                    <Typography type="display1">
+                      {`${weather.pressure} hPa`}
+                    </Typography>
+                  </div>
+                </div>
+              </Grid>
+              <Grid item>
+                <Typography
+                  variant="h2"
+                  color="textPrimary"
+                  component="h2"
+                  style={{
+                    fontFamily: 'Montserrat',
+                    paddingTop: '10px',
+                  }}
+                >
+                  {Math.round(weather.temperature)}&deg;F
+                </Typography>
+                <Typography type="display1">
+                  {weather.description}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                spacing={1}
+                direction="row"
+                justify="center"
+                alignItems="center"
+                alignContent="center"
+                wrap="nowrap"
+              >
+                <i
+                  className={iconClass}
+                  style={{
+                    fontSize: '128px',
+                    float: 'right',
+                  }}
+                ></i>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </Container>
     </div>
   );
 };

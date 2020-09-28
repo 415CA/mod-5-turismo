@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +7,10 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { HeroImage } from '../../Images';
+import { Container } from '@material-ui/core';
+
+import Modal from '@material-ui/core/Modal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +37,17 @@ const Unsplash = (search) => {
   const classes = useStyles();
   const [photos, setPhotos] = useState([]);
   const query = search.destination;
-  const UNSPLASH_API_KEY = process.env.REACT_APP_UNSPLASH
+  const UNSPLASH_API_KEY = process.env.REACT_APP_UNSPLASH;
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   var config = {
     method: 'get',
@@ -63,43 +77,40 @@ const Unsplash = (search) => {
     if (photos) {
       displayPhotos = photos.map((photo) => {
         return (
-
-          <GridListTile key={photo.id}>
+          <GridListTile
+            key={photo.id}
+            onClick={() => window.open(photo.links.html, '_blank')}
+          >
             <img
               src={photo.urls.regular}
               alt={photo.alt_description}
             />
-            <GridListTileBar
-              title={photo.description}
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
-              actionIcon={
-                <IconButton aria-label={`star ${photo.id}`}>
-                  <StarBorderIcon className={classes.title} />
-                </IconButton>
-              }
-            />
           </GridListTile>
-
-        )
+        );
       });
     }
     return displayPhotos;
   };
 
   return (
-    <div className={classes.root}>
-      <h2>Photos</h2>
-      <GridList
-        className={classes.gridList}
-        cols={2.5}
-        cellHeight={400}
-      >
-        {disPhotos()}
-      </GridList>
-    </div>
+    <Fragment>
+      <Container outlined raised={true}>
+        <HeroImage
+          image={photos[Math.floor(Math.random() * photos.length)]}
+        />
+      </Container>
+
+      <br></br>
+      <Container outlined raised={true}>
+        <GridList
+          className={classes.gridList}
+          cols={2.5}
+          cellHeight={400}
+        >
+          {disPhotos()}
+        </GridList>
+      </Container>
+    </Fragment>
   );
 };
 

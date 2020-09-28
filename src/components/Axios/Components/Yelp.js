@@ -78,13 +78,14 @@ const Yelp = (search) => {
   const [isLoading, setIsLoading] = useState(false);
   const [listings, setListings] = useState([]);
   const query = search.destination;
+  const YELP_API_KEY = process.env.REACT_APP_YELP_API_KEY;
 
   var config = {
     method: 'get',
     url: `${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?term=&location=${query}`,
     headers: {
       Authorization:
-        'Bearer daQkyIuSTmkUL-P3OQqQvQMQEwoihMKtnZ9Jv8e4gjOPk3nb_O_DYwD3ySG4p5b0DWCgt1MUjFgfB2wUNvjd3H5tdUCpD-UaVtGoHyZLi8IUI9rLN7orU_53-HdhX3Yx',
+        `Bearer ${YELP_API_KEY}`,
     },
   };
 
@@ -126,10 +127,14 @@ const Yelp = (search) => {
           {isLoading ? (
             <div>Loading...</div>
           ) : (
-            listings.map((listing) => {
+            listings.slice(0, 15).map((listing) => {
               return (
-                <Grid item xs={12} sm={6} md={4}>
-                  <Card className={classes.card}>
+                <Grid item xs={12} sm={6} md={4} key={listing.id}>
+                  <Card
+                    className={classes.card}
+                    outlined
+                    raised={true}
+                  >
                     <CardActionArea
                       href={listing.url}
                       target="_blank"

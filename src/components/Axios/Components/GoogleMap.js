@@ -47,7 +47,8 @@ const GoogleMap = (search) => {
         <Paper
           className={classes.mainFeaturedPost}
           elevation={3}
-
+          outlined
+          raised={true}
         >
           <div id="map" className={classes.mapResponsive}>
             <iframe
