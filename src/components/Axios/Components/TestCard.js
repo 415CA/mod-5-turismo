@@ -66,7 +66,6 @@ const Wikipedia = (search) => {
       const request = await axios(config)
         .then((response) => {
           setArticle(response.data.query.pages[0].extract);
-          console.log(response.data.query.pages[0].extract);
           setIsLoading(false);
         })
         .catch(function (error) {

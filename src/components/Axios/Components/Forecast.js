@@ -42,7 +42,6 @@ const Forecast = (props) => {
     }
   };
 
-  console.log('Forecast_Props', props);
   return (
     <Fragment>
       <h2>Forecast</h2>

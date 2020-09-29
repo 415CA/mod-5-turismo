@@ -10,7 +10,6 @@ import {
   Avatar,
   IconButton,
 } from '@material-ui/core';
-import NearMeIcon from '@material-ui/icons/NearMe';
 
 const NYTimes = (search) => {
   const truncate = (description, n) => {
@@ -69,9 +68,10 @@ const NYTimes = (search) => {
         <Divider />
         {articles.map((article) => {
           return (
-            <Fragment key={article.id} >
+            <Fragment key={article.web_url}>
               <CardActionArea
                 onClick={() => window.open(article.web_url, '_blank')}
+                key={article.id}
               >
                 <div style={{ padding: '1rem' }}>
                   <Typography use="headline5" tag="div">

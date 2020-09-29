@@ -28,7 +28,6 @@ function Maps(props) {
         longitude: props.longitude,
       },
     });
-    console.log(props.latitude);
 
   const createMarker = () =>
     new window.google.maps.Marker({

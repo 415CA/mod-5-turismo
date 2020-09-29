@@ -10,8 +10,6 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { HeroImage } from '../../Images';
 import { Container } from '@material-ui/core';
 
-import Modal from '@material-ui/core/Modal';
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -38,16 +36,7 @@ const Unsplash = (search) => {
   const [photos, setPhotos] = useState([]);
   const query = search.destination;
   const UNSPLASH_API_KEY = process.env.REACT_APP_UNSPLASH;
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const searchImage = search.imageLoaded
 
   var config = {
     method: 'get',
@@ -63,6 +52,12 @@ const Unsplash = (search) => {
       const request = await axios(config)
         .then(function (response) {
           setPhotos(response.data.results);
+          searchImage(
+            response.data.results[
+              Math.floor(Math.random() * photos.length)
+            ],
+          );
+
         })
         .catch(function (error) {
           console.log(error);

@@ -21,7 +21,6 @@ const Michelin = (search) => {
         .then((response) => {
           setListings(response);
           setIsLoading(false);
-          console.log("Response", response);
         })
         .catch((error) => {
           console.log(error);

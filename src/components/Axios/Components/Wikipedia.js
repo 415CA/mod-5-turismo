@@ -1,17 +1,8 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
-import {
-  Typography,
-  Card,
-  CardHeader,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  Grid,
-  Container,
-} from '@material-ui/core';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,7 +57,6 @@ const Wikipedia = (search) => {
       const request = await axios(config)
         .then((response) => {
           setArticle(response.data.query.pages[0].extract);
-          console.log(response.data.query.pages[0].extract);
           setIsLoading(false);
         })
         .catch(function (error) {

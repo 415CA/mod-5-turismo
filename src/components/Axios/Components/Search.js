@@ -23,13 +23,10 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 
-import { HeroImage, HeroUnit } from '../../Images';
+import FavoritesButton from './FavoritesButton'
 
-import MenuIcon from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/Home';
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import SignOutButton from '../../Authentication/SignOut';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
+import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -61,6 +58,11 @@ const Search = () => {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
 
+    const [click, setClick] = useState(false);
+    const [id, setId] = useState(0);
+    const [image, setImage ] = useState('')
+    const [imageLoaded, setImageLoaded] = useState(false)
+
   const saveData = {
     name,
     latitude,
@@ -82,11 +84,61 @@ const Search = () => {
     fetchData();
   }, [url]);
 
+  const destButton = {
+    name: name,
+    latitude: latitude,
+    longitude: longitude,
+  };
+
+  const postRequest = () => {
+    axios
+      .post('http://localhost:3000/destinations', {
+        name: name,
+        latitude: latitude,
+        longitude: longitude,
+      })
+      .then((response) => {
+        setId(response.data.id);
+      });
+    setClick(true);
+  };
+
+  const deleteRequest = () => {
+    axios
+      .delete(`http://localhost:3000/destinations/${id}`)
+      .then((response) => console.log('Delete', response));
+    setClick(false);
+  };
+  
+  const getImage = (unsplashImage) => {
+    setImage(unsplashImage);
+    setImageLoaded(true);
+    console.log("image", image);
+  }
+
   return (
     <Fragment>
       <Container outlined raised={true}>
         <Toolbar className={classes.toolbar}>
-          <Button>Favorite</Button>
+          {click ? (
+            <IconButton
+              name="add"
+              circular
+              onClick={() => deleteRequest(id)}
+            >
+              <BookmarkIcon />
+            </IconButton>
+          ) : (
+            <IconButton
+              name="add"
+              type="submit"
+              circular
+              onClick={() => postRequest(destButton)}
+            >
+              <BookmarkBorderOutlinedIcon />
+            </IconButton>
+          )}
+
           <Typography
             component="h2"
             variant="h5"
@@ -111,9 +163,6 @@ const Search = () => {
               label="Search Destinations"
               onChange={(event) => setQuery(event.target.value)}
             />
-            {/* <IconButton>
-            <SearchIcon />
-          </IconButton> */}
           </form>
         </Toolbar>
       </Container>
@@ -124,24 +173,22 @@ const Search = () => {
         <Fragment>
           <Grid>
             <Test destination={name} />
-            {/* <br></br>
-            <Unsplash destination={name} />
-            <br></br> */}
-            {/* <Weather
+            <br></br>
+            <Unsplash destination={name} imageLoaded={getImage} />
+            <br></br>
+            <Weather
               name={name}
-              destination={query}
+              destination={name}
               latitude={latitude}
               longitude={longitude}
             />
             <br></br>
             <GoogleMap
-              destination={query}
+              destination={name}
               latitude={latitude}
               longitude={longitude}
             />
-            <br></br> */}
-
-            {/* <br></br>
+            <br></br>
 
             <Grid
               container
@@ -152,14 +199,14 @@ const Search = () => {
               alignContent="center"
             >
               <Grid item>
-                <NYTimes destination={query} />
+                <NYTimes destination={name} />
               </Grid>
               <Grid item>
-                <Guardian destination={query} />
+                <Guardian destination={name} />
               </Grid>
               <br></br>
-              <Yelp destination={query} />
-            </Grid> */}
+              <Yelp destination={name} />
+            </Grid>
           </Grid>
         </Fragment>
       )}
