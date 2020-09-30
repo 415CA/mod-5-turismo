@@ -22,6 +22,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
+import Divider from '@material-ui/core/Divider';
 
 import FavoritesButton from './FavoritesButton';
 
@@ -167,43 +168,72 @@ const Search = () => {
         <Fragment></Fragment>
       ) : (
         <Fragment>
-          <Grid>
-            <Unsplash destination={name} photos={getPhotos} />
-            <br></br>
-            <Wikipedia destination={name} />
-            <br></br>
-            <Weather
-              name={name}
-              destination={name}
-              latitude={latitude}
-              longitude={longitude}
-            />
-            <br></br>
-            <GoogleMap
-              destination={name}
-              latitude={latitude}
-              longitude={longitude}
-            />
-            <br></br>
-
-            <Grid
-              container
-              spacing={5}
-              direction="row"
-              justify="center"
-              alignItems="center"
-              alignContent="center"
-            >
-              <Grid item>
-                <NYTimes destination={name} />
-              </Grid>
-              <Grid item>
-                <Guardian destination={name} />
-              </Grid>
+            <Grid>
               <br></br>
-              <Yelp destination={name} />
+              <Unsplash destination={name} photos={getPhotos} />
+              <br></br>
+              <Container>
+                <Typography align="center" gutterBottom="true" variant="h4">
+                  Weather
+          </Typography>
+                <Divider variant="inset" />
+                <br></br>
+                <Weather
+                  name={name}
+                  destination={name}
+                  latitude={latitude}
+                  longitude={longitude}
+                />
+                <br></br>
+                <Wikipedia destination={name} />
+              </Container>
+              <br></br>
+              <Container>
+                <Typography align="center" gutterBottom="true" variant="h4">
+                  Map
+          </Typography>
+                <Divider variant="inset" />
+                <br></br>
+                <GoogleMap
+                  destination={name}
+                  latitude={latitude}
+                  longitude={longitude}
+                />
+              </Container>
+
+              <br></br>
+              <Container>
+                <Typography align="center" gutterBottom="true" variant="h4">
+                  Travel News
+          </Typography>
+                <Divider variant="inset" />
+                <br></br>
+                <Grid
+                  container
+                  spacing={5}
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                  alignContent="center"
+                >
+                  <Grid item>
+                    <NYTimes destination={name} />
+                  </Grid>
+                  <Grid item>
+                    <Guardian destination={name} />
+                  </Grid>
+                </Grid>
+              </Container>
+              <br></br>
+              <Container>
+                <Typography align="center" gutterBottom="true" variant="h4">
+                  Experiences
+          </Typography>
+                <Divider variant="inset" />
+                <br></br>
+                <Yelp destination={name} />
+              </Container>
             </Grid>
-          </Grid>
         </Fragment>
       )}
     </Fragment>
