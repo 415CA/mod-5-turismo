@@ -28,7 +28,7 @@ const HeroUnit = () => {
               component="h1"
               variant="h2"
               align="center"
-              color="textPrimary"
+              color="textSecondary"
               gutterBottom
             >
               Turismo
@@ -39,21 +39,13 @@ const HeroUnit = () => {
               color="textSecondary"
               paragraph
             >
-              Something short and leading about the collection
-              below—its contents, the creator, etc. Make it short and
-              sweet, but not too short so folks don&apos;t simply skip
-              over it entirely.
+              Discover new destinations and experiences from around the globe. 
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
+                  <Button variant="contained" color="primary" href={'/signin'} >
                     Explore
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Sign Up
                   </Button>
                 </Grid>
               </Grid>

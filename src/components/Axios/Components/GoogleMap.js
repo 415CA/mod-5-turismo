@@ -56,7 +56,7 @@ const GoogleMap = (search) => {
               // width="450"
               // height="600"
               frameborder="0"
-              src={`https://www.google.com/maps/embed/v1/search?key=${GOOGLE}&q=${query}`}
+              src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE}&q=${query}`}
               allowfullscreen
             ></iframe>
           </div>

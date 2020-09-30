@@ -28,14 +28,14 @@ const DstListItem = (props) => {
     <Grid item xs={12} md={6}>
       <CardActionArea
         component="a"
-        href={`/destinations/${destination.id}`}
+        href={`/destinations/${destination.name}`}
       >
         <Card className={classes.card}>
           <Hidden xsDown>
             <CardMedia
               className={classes.cardMedia}
               image={destination.image}
-              title={destination.imageTitle}
+              title={destination.name}
             />
           </Hidden>
           <div className={classes.cardDetails}>

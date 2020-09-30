@@ -1,17 +1,11 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { MediaGrid } from '../Cards';
-import { HeroImage, HeroUnit } from '../Images';
-import Destinations from '../Destinations';
 
-import DstImgItem from '../Destinations/ImageList/DstImgItem';
-import { HeroImageLanding } from '../Images/HeroImage';
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-const Landing = () => {
+const List = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [cities, setCities] = useState([]);
+  const setQuery = props.setQuery
 
   var config = {
     method: 'get',
@@ -34,11 +28,7 @@ const Landing = () => {
     getCities();
   }, []);
 
-  return (
-    <Fragment>
-      <HeroImageLanding />
-    </Fragment>
-  );
+  return <MediaGrid destinations={cities} setQuery={setQuery}/>;
 };
 
-export default Landing;
+export default List;

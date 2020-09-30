@@ -62,14 +62,6 @@ const NavigationAuth = ({ authUser }) => {
     <div className={classes.root}>
       <AppBar position="static" color="transparent">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
 
           <Typography
             variant="h6"
@@ -128,14 +120,6 @@ const NavigationNonAuth = () => {
     <div className={classes.root}>
       <AppBar position="static" color="transparent">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
 
           <Typography
             variant="h6"

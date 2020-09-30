@@ -7,7 +7,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import { HeroImage } from '../../Images';
+import { HeroImage } from '../../Images/';
 import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +36,7 @@ const Unsplash = (search) => {
   const [photos, setPhotos] = useState([]);
   const query = search.destination;
   const UNSPLASH_API_KEY = process.env.REACT_APP_UNSPLASH;
-  const searchImage = search.imageLoaded
+  const searchPhotos = search.photos;
 
   var config = {
     method: 'get',
@@ -52,12 +52,7 @@ const Unsplash = (search) => {
       const request = await axios(config)
         .then(function (response) {
           setPhotos(response.data.results);
-          searchImage(
-            response.data.results[
-              Math.floor(Math.random() * photos.length)
-            ],
-          );
-
+          searchPhotos(response.data.results[Math.floor(Math.random() * photos.length)])
         })
         .catch(function (error) {
           console.log(error);

@@ -14,7 +14,7 @@ const FavoritesButton = (destination) => {
 
   const deleteRequest = () => {
     axios
-      .delete(`/destinations/${id}`)
+      .delete(`http://localhost:3000/destinations/${id}`)
       .then((response) => console.log('Delete', response));
     setClick(false);
   };
