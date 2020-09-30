@@ -6,6 +6,9 @@ import Destinations from '../Destinations';
 
 import DstImgItem from '../Destinations/ImageList/DstImgItem';
 import { HeroImageLanding } from '../Images/HeroImage';
+import LandingArticles from './LandingArticles'
+import { Grid } from '@material-ui/core';
+
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -37,6 +40,7 @@ const Landing = () => {
   return (
     <Fragment>
       <HeroImageLanding />
+      <LandingArticles />
     </Fragment>
   );
 };

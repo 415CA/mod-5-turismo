@@ -11,7 +11,8 @@ import {
   CardContent,
   Grid,
   Container,
-  Button
+  Button,
+  Avatar,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
@@ -85,26 +86,58 @@ const Wikipedia = (search) => {
       ? description.substr(0, n - 1) + '...'
       : description;
   };
-
+  // 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg'
   return (
     <div>
-      <Container maxWidth="md" outlined raised={true}>
-        {
-          <Fragment>
-            <p> {truncate(article, 1000)}
-            <Button
-              color="default"
-              // className={classes.button}
-              href={`https://en.wikipedia.org/w/index.php?search=${destination}`}
-              target="_blank"
-              startIcon={<MenuBookIcon />}
-            >
-              Read More
-            </Button>
-            </p>
-          </Fragment>
-        }
-      </Container>
+      <Fragment>
+        <Container maxWidth="md" outlined raised={true}>
+          <Card outlined raised={true}>
+            <CardContent>
+              <Grid
+                container
+                spacing={1}
+                direction="row"
+                justify="center"
+                alignItems="center"
+                alignContent="center"
+              ></Grid>
+              <Grid item>
+                <CardHeader
+                  title="Wikipedia"
+                  avatar={
+                    <Avatar
+                      alt="Wikipedia"
+                      src="https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg"
+                    />
+                  }
+                ></CardHeader>
+              </Grid>
+
+              <Grid item>
+                <div className={classes.root}>
+                  <div className={classes.flex}>
+                    <Typography
+                      type="display1"
+                    >
+                      {truncate(article, 1000)}
+                    </Typography>
+
+                    <Button
+                      color="default"
+                      // className={classes.button}
+                      href={`https://en.wikipedia.org/w/index.php?search=${destination}`}
+                      target="_blank"
+                      startIcon={<MenuBookIcon />}
+                    >
+                      Read More
+                    </Button>
+                  </div>
+                </div>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Container>
+      </Fragment>
     </div>
   );
 };
