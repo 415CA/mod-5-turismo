@@ -65,6 +65,7 @@ const Wikipedia = (search) => {
       setIsLoading(true);
       const request = await axios(config)
         .then((response) => {
+          console.log(response)
           setArticle(response.data.query.pages[0].extract);
           setIsLoading(false);
         })

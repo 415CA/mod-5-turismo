@@ -1,8 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
-import { Container } from '@material-ui/core';
+import {
+  Typography,
+  Card,
+  CardHeader,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Grid,
+  Container,
+  Button
+} from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,6 +68,7 @@ const Wikipedia = (search) => {
       setIsLoading(true);
       const request = await axios(config)
         .then((response) => {
+          console.log(response);
           setArticle(response.data.query.pages[0].extract);
           setIsLoading(false);
         })
@@ -75,8 +88,22 @@ const Wikipedia = (search) => {
 
   return (
     <div>
-      <Container maxWidth="md" >
-        {<p> {truncate(article, 400)} </p>}
+      <Container maxWidth="md" outlined raised={true}>
+        {
+          <Fragment>
+            <p> {truncate(article, 1000)}
+            <Button
+              color="default"
+              // className={classes.button}
+              href={`https://en.wikipedia.org/w/index.php?search=${destination}`}
+              target="_blank"
+              startIcon={<MenuBookIcon />}
+            >
+              Read More
+            </Button>
+            </p>
+          </Fragment>
+        }
       </Container>
     </div>
   );

@@ -25,6 +25,7 @@ import Michelin from '../../components/Axios/Components/Michelin';
 import NYTimes from '../../components/Axios/Components/NYTimes';
 import GoogleMap from '../../components/Axios/Components/GoogleMap';
 import Test from '../../components/Axios/Components/TestCard'
+import Wikipedia from '../../components/Axios/Components/Wikipedia';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -79,9 +80,9 @@ const Destinations = (city) => {
 
 
       <Grid>
-        <Test destination={name} />
-        <br></br>
         <Unsplash destination={name} imageLoaded={getImage} />
+        <br></br>
+        <Wikipedia destination={name} />
         <br></br>
         <Weather
           name={name}

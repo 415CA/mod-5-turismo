@@ -32,6 +32,7 @@ import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import AddLocationIcon from '@material-ui/icons/AddLocation';
 
 import DestList from '../../../components/Search/List';
+import Wikipedia from './Wikipedia';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -112,18 +113,15 @@ const Search = () => {
 
   const getPhotos = (image) => {
     setPhoto(image.urls.regular);
-    console.log(image.urls.regular);
     setPhotoLoaded(true);
   };
-
-  console.log('Photo', photo);
 
   return (
     <Fragment>
       <Container>
         <Toolbar className={classes.toolbar}>
           {isLoading ? (
-            <Fragment />
+            <Fragment></Fragment>
           ) : (
             <Fragment>
               <IconButton
@@ -133,13 +131,7 @@ const Search = () => {
               >
                 <AddLocationIcon />
               </IconButton>
-
-              <IconButton
-                name="add"
-                onClick={() => deleteRequest(id)}
-              >
-                <RemoveCircleIcon />
-              </IconButton>
+              Add to Favorites
             </Fragment>
           )}
 
@@ -178,7 +170,7 @@ const Search = () => {
           <Grid>
             <Unsplash destination={name} photos={getPhotos} />
             <br></br>
-            <Test destination={name} />
+            <Wikipedia destination={name} />
             <br></br>
             <Weather
               name={name}
