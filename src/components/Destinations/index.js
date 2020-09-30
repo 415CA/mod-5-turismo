@@ -1,9 +1,7 @@
-// import DstListGrid from './CardList'
-// import DstImgItem from './ImageList'
-// export { DstListGrid, DstImgItem };
-
 import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
+import { useLocation } from "react-router-dom";
+
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Typography,
@@ -15,7 +13,9 @@ import {
   CardMedia,
   Avatar,
   IconButton,
-  Grid
+  Grid, 
+  Container, 
+  Toolbar
 } from '@material-ui/core';
 import Guardian from '../../components/Axios/Components/Guardian';
 import Weather from '../../components/Axios/Components/Weather';
@@ -26,8 +26,29 @@ import NYTimes from '../../components/Axios/Components/NYTimes';
 import GoogleMap from '../../components/Axios/Components/GoogleMap';
 import Test from '../../components/Axios/Components/TestCard'
 
+const useStyles = makeStyles((theme) => ({
+  toolbar: {
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  toolbarTitle: {
+    flex: 1,
+  },
+  toolbarSecondary: {
+    justifyContent: 'space-between',
+    overflowX: 'auto',
+  },
+  toolbarLink: {
+    padding: theme.spacing(1),
+    flexShrink: 0,
+  },
+}));
+
 const Destinations = (city) => {
-  const { name, latitude, longitude } = city;
+  const classes = useStyles();
+
+  const location = useLocation();
+  console.log(location)
+  const { name, latitude, longitude } = location.state;
   const [image, setImage] = useState('')
   const [imageLoaded, setImageLoaded] = useState(false)
 
@@ -37,8 +58,26 @@ const Destinations = (city) => {
     console.log("image", image);
   }
 
+
   return (
     <Fragment>
+
+      <Container>
+        <Toolbar className={classes.toolbar}>
+          <Typography
+            component="h2"
+            variant="h5"
+            color="inherit"
+            align="center"
+            noWrap
+            className={classes.toolbarTitle}
+          >
+          <div>{name}</div>
+          </Typography>
+        </Toolbar>
+      </Container>
+
+
       <Grid>
         <Test destination={name} />
         <br></br>

@@ -32,9 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const GoogleMap = (search) => {
-    const classes = useStyles();
+  const classes = useStyles();
 
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,9 +54,9 @@ const GoogleMap = (search) => {
               className={classes.mapResponsiveiframe}
               // width="450"
               // height="600"
-              frameborder="0"
+              frameBorder="0"
               src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE}&q=${query}`}
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
         </Paper>

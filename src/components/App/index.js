@@ -13,6 +13,7 @@ import Destinations from '../Destinations';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Authentication/Session';
+import Search from '../Axios/Components/Search';
 
 const App = () => (
   <Router>
@@ -29,6 +30,7 @@ const App = () => (
       <Route exact path={ROUTES.HOME} component={HomePage} />
       <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route exact path={ROUTES.ADMIN} component={AdminPage} />
+      <Route exact path={ROUTES.SEARCH} component={Search} />
       <Route
         exact
         path={ROUTES.DESTINATION_DETAILS}

@@ -25,6 +25,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CurrentLocation from '../../Geolocation'
 
 import Search from '../../Axios/Components/Search'
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,6 +57,7 @@ const NavigationAuth = ({ authUser }) => {
   const handleClickLanding = () => history.push(ROUTES.LANDING);
   const handleClickAccount = () => history.push(ROUTES.ACCOUNT);
   const handleClickHome = () => history.push(ROUTES.HOME);
+  const handleClickSearch = () => history.push(ROUTES.SEARCH);
   const location = CurrentLocation();
 
   return (
@@ -81,6 +83,17 @@ const NavigationAuth = ({ authUser }) => {
             location={location}
           >
             <HomeIcon />
+          </IconButton>
+
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+            onClick={handleClickSearch}
+            location={location}
+          >
+            <SearchIcon />
           </IconButton>
 
           <IconButton

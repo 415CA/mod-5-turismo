@@ -75,7 +75,7 @@ const Wikipedia = (search) => {
 
   return (
     <div>
-      <Container maxWidth="md" outlined raised={true}>
+      <Container maxWidth="md" >
         {<p> {truncate(article, 400)} </p>}
       </Container>
     </div>

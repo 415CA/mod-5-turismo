@@ -23,7 +23,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 
-import FavoritesButton from './FavoritesButton'
+import FavoritesButton from './FavoritesButton';
 
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
@@ -31,7 +31,7 @@ import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutline
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import AddLocationIcon from '@material-ui/icons/AddLocation';
 
-import DestList from '../../../components/Search/List'
+import DestList from '../../../components/Search/List';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -63,10 +63,10 @@ const Search = () => {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
 
-    const [click, setClick] = useState(false);
-    const [id, setId] = useState(0);
-    const [photo, setPhoto ] = useState('')
-    const [photoLoaded, setPhotoLoaded] = useState(false)
+  const [click, setClick] = useState(false);
+  const [id, setId] = useState(0);
+  const [photo, setPhoto] = useState('');
+  const [photoLoaded, setPhotoLoaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -114,33 +114,34 @@ const Search = () => {
     setPhoto(image.urls.regular);
     console.log(image.urls.regular);
     setPhotoLoaded(true);
-  }
+  };
 
-  console.log("Photo", photo);
+  console.log('Photo', photo);
 
   return (
     <Fragment>
-      <Container outlined raised={true}>
+      <Container>
         <Toolbar className={classes.toolbar}>
+          {isLoading ? (
+            <Fragment />
+          ) : (
+            <Fragment>
+              <IconButton
+                name="add"
+                type="submit"
+                onClick={() => postRequest(destButton)}
+              >
+                <AddLocationIcon />
+              </IconButton>
 
-          <IconButton
-            name="add"
-            type="submit"
-            circular
-            onClick={() => postRequest(destButton)}
-          >
-            <AddLocationIcon />
-          </IconButton>
-
-            <IconButton
-              name="add"
-              circular
-              onClick={() => deleteRequest(id)}
-            >
-            <RemoveCircleIcon />
-            </IconButton>
-
-
+              <IconButton
+                name="add"
+                onClick={() => deleteRequest(id)}
+              >
+                <RemoveCircleIcon />
+              </IconButton>
+            </Fragment>
+          )}
 
           <Typography
             component="h2"
@@ -150,7 +151,7 @@ const Search = () => {
             noWrap
             className={classes.toolbarTitle}
           >
-            {isLoading ? <div>Favorite Destinations</div> : <div>{name}</div>}
+            {isLoading ? <div>Search</div> : <div>{name}</div>}
           </Typography>
           <form
             onSubmit={(event) => {
@@ -171,15 +172,13 @@ const Search = () => {
       </Container>
 
       {isLoading ? (
-        <Fragment>
-          <DestList setQuery={setQuery} />
-        </Fragment>
+        <Fragment></Fragment>
       ) : (
         <Fragment>
           <Grid>
-            <Unsplash destination={name} photos={getPhotos}/>
+            <Unsplash destination={name} photos={getPhotos} />
             <br></br>
-              <Test destination={name} />
+            <Test destination={name} />
             <br></br>
             <Weather
               name={name}

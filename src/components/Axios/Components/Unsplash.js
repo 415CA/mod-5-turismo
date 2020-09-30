@@ -84,14 +84,14 @@ const Unsplash = (search) => {
 
   return (
     <Fragment>
-      <Container outlined raised={true}>
+      <Container >
         <HeroImage
           image={photos[Math.floor(Math.random() * photos.length)]}
         />
       </Container>
 
       <br></br>
-      <Container outlined raised={true}>
+      <Container >
         <GridList
           className={classes.gridList}
           cols={2.5}

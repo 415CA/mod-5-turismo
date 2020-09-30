@@ -14,3 +14,4 @@ export const DESTINATION = '/destination';
 export const DESTINATION_DETAILS = '/destination/:id'
 export const TRIP = '/trips';
 export const TRIP_DETAILS = '/trips/:id'
+export const SEARCH = '/search';

@@ -22,7 +22,7 @@ const MediaGrid = (landing) => {
     <Container className={classes.cardGrid} maxWidth="md">
       <Grid container spacing={4}>
         {destinations.map((destination) => (
-          <MediaCard destination={destination} setQuery={setQuery} />
+          <MediaCard destination={destination} setQuery={setQuery} key={destination.id} />
         ))}
       </Grid>
     </Container>
