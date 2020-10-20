@@ -71,17 +71,17 @@ Turismo is a travel discovery engine providing information about landmarks, expe
 |![San Francisco](src/images/DestLevels/SanFrancisco.png)|![Haight-Ashbury](src/images/DestLevels/HaightAshbury.png)|![Golden Gate Bridge](src/images/DestLevels/GoldenGateBridge.png)|
 
 ### Destinations
+View travel news, Wikipedia info, photos, current weather, and a local map for your destination
 ![View Destination](src/images/FullPage.gif)
-* View travel news, Wikipedia info, photos, current weather, and a local map for your destination
+
 
 ### Favorite Destinations
+Save your favorite destinations
 ![Favorite Destinations](src/images/Destinations.gif)
-* Save an destination via bookmark
-* Remove a bookmark
 
 ### Auth & Account Features
 ![Auth & Account Features](src/images/SignInPage.png)
-  Log in via email and password or existing Google account, completed with [Firebase Authentication](https://firebase.google.com/docs/auth)
+  Log in via email and password or existing Google account with [Firebase Authentication](https://firebase.google.com/docs/auth)
 
 <a name="tech-stack"/>
 
