@@ -62,13 +62,13 @@ Turismo is a travel discovery engine providing information about landmarks, expe
 
 #### Explore millions of destinations and landmarks worldwide. The search can be as broad or as narrow as you would like. 
 
-|Continent| Country | State|
+|Continent: North America| Country: United States | State: California|
 |:---|:---|:---|
-|![North America](src/images/DestLevels/NorthAmerica.png)|![United States](src/images/DestLevels/UnitedStates.png)|![Search Destinations](src/images/DestLevels/California.png)|
+|![North America](src/images/DestLevels/NorthAmerica.png)|![United States](src/images/DestLevels/UnitedStates.png)|![California](src/images/DestLevels/California.png)|
 
-|City| Neighborhood| Landmark|
+|City: San Francisco| Neighborhood: Haight-Ashbury| Landmark: Golden Gate Bridge|
 |:---|:---|:---|
-|![City](src/images/DestLevels/SanFrancisco.png)|![Neighborhood](src/images/DestLevels/HaightAshbury.png)|![Landmark](src/images/DestLevels/GoldenGateBridge.png)|
+|![San Francisco](src/images/DestLevels/SanFrancisco.png)|![Haight-Ashbury](src/images/DestLevels/HaightAshbury.png)|![Golden Gate Bridge](src/images/DestLevels/GoldenGateBridge.png)|
 
 ### Destinations
 ![View Destination](src/images/FullPage.gif)
