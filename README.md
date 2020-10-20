@@ -1,68 +1,120 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Turismo
 
-## Available Scripts
+Turismo is a travel discovery engine providing information about landmarks, experiences, and restaurants for destinations around the globe
 
-In the project directory, you can run:
+[Link to Backend API](https://github.com/415CA/turismo-backend)
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of Contents
+* [Getting Started](#getting-started)
+* [Features](#features)
+* [Tech Stack](#tech-stack)
+* [APIs](#apis)
+* [Tools](#tools)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![Turismo](src/images/header.png)
 
-### `npm test`
+<a name="getting-started"/>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
+1. Install [Rails Backend API](https://github.com/415CA/turismo-backend)
+2. Install [Node.js and npm](https://www.npmjs.com/get-npm)
 
-### `npm run build`
+    ```$ brew install node```
+    
+3. Clone this repo and cd into the directory
+4. Install all dependencies
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```$ npm install```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+5. Create a [Firebase](https://console.firebase.google.com/u/0/) project with your Google Account 
+6. Create an .env file in the React project's root folder with the following info from your Firebase settings.
+    ```
+    REACT_APP_API_KEY=XXXXxxxx 
+    REACT_APP_AUTH_DOMAIN=xxxxXXXX.firebaseapp.com
+    REACT_APP_DATABASE_URL=https://xxxXXXX.firebaseio.com
+    REACT_APP_PROJECT_ID=xxxxXXXX
+    REACT_APP_STORAGE_BUCKET=xxxxXXXX.appspot.com
+    REACT_APP_MESSAGING_SENDER_ID=xxxxXXXX
+    REACT_APP_CONFIRMATION_EMAIL_REDIRECT=http://localhost:3000
+    ```
+6. Add the following API keys from the following sources to the .env file
+    ```
+    REACT_APP_GOOGLE_MAPS_API_KEY=XXXXX
+    REACT_APP_WEATHER=XXXXX
+    REACT_APP_YELP_API_KEY=XXXXX
+    REACT_APP_VIA_MICHELIN=XXXXX
+    REACT_APP_UNSPLASH=XXXXX
+    REACT_APP_NYTIMES=XXXXX
+    REACT_APP_CURRENTS=XXXXX
+    REACT_APP_NEWSAPI=XXXXX
+    ```
+7. Make sure the Rails server is running and then run the app
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    ```$ npm start```
+    
+<a name="features"/>
 
-### `npm run eject`
+## Features
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Search Destinations
+![Search Destinations](src/images/Search.gif)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Explore millions of destinations and landmarks worldwide. The search can be as broad or as narrow as you would like. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+|Continent| Country | State|
+|:---|:---|:---|
+|![North America](src/images/DestLevels/NorthAmerica.png)|![United States](src/images/DestLevels/UnitedStates.png)|![Search Destinations](src/images/DestLevels/California.png)|
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+|City| Neighborhood| Landmark|
+|:---|:---|:---|
+|![City](src/images/DestLevels/SanFrancisco.png)|![Neighborhood](src/images/DestLevels/HaightAshbury.png)|![Landmark](src/images/DestLevels/GoldenGateBridge.png)|
 
-## Learn More
+### Destinations
+![View Destination](src/images/FullPage.gif)
+* View travel news, Wikipedia info, photos, current weather, and a local map for your destination
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Favorite Destinations
+![Favorite Destinations](src/images/Destinations.gif)
+* Save an destination via bookmark
+* Remove a bookmark
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Auth & Account Features
+![Auth & Account Features](src/images/SignInPage.png)
+  Log in via email and password or existing Google account, completed with [Firebase Authentication](https://firebase.google.com/docs/auth)
 
-### Code Splitting
+<a name="tech-stack"/>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Tech Stack
+* React.js
+* Ruby on Rails API (Backend: https://github.com/415CA/turismo-backend)
+* Firebase
+* PostgreSQL
+* HTML
+* CSS
+* Material UI
+* Active Record
 
-### Analyzing the Bundle Size
+<a name="apis"/>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## APIs
+* [Currents](https://currentsapi.services/en)
+* [Google Maps](https://developers.google.com/maps/documentation)
+* [NewsAPI](https://newsapi.org/)
+* [NY Times](https://developer.nytimes.com/apis)
+* [OpenWeatherMap](https://openweathermap.org/api)
+* [Unsplash](https://unsplash.com/developers)
+* [Via Michelin](https://api.viamichelin.com/services/api-js/)
+* [Yelp Fusion](https://www.yelp.com/fusion)
 
-### Making a Progressive Web App
+<a name="tools"/>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Tools
+* [Axios](https://www.npmjs.com/package/react-axios)
+* [ActiveModel::Serializer](https://github.com/rails-api/active_model_serializers)
+* [Day.JS](https://www.npmjs.com/package/dayjs)
+* [MomentJS](https://momentjs.com/)
+* [Rack CORS](https://github.com/cyu/rack-cors)
+* [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+* [Styled Components](https://styled-components.com/)
+* [Weather Icons](https://erikflowers.github.io/weather-icons/)

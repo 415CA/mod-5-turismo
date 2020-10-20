@@ -45,9 +45,11 @@ export default function LandingArticles(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState([]);
 
+  const NEWSAPI = process.env.REACT_APP_NEWSAPI
+
   let config = {
     method: 'get',
-    url: `http://newsapi.org/v2/everything?q=travel&from&sortBy&apiKey=6dcf6b1ce6584d8ca044c1d7410cd46e`,
+    url: `http://newsapi.org/v2/everything?q=travel&from&sortBy&apiKey=${NEWSAPI}`,
   };
 
   useEffect(() => {
@@ -76,7 +78,6 @@ export default function LandingArticles(props) {
   const articleCard = (article) => {
     return (
       <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${article.urlToImage})` }} onClick={() => window.open(article.url, '_blank')}>
-        {/* Increase the priority of the hero background image */}
         {<img style={{ display: 'none' }} src={article.urlToImage} alt={article.name} />}
         <div className={classes.overlay} />
         <Grid container>
@@ -88,9 +89,6 @@ export default function LandingArticles(props) {
               <Typography variant="h5" color="inherit" paragraph>
                 {truncate(article.description, 150)}
               </Typography>
-              {/* <Link variant="subtitle1" >
-                {article.name}
-              </Link> */}
             </div>
           </Grid>
         </Grid>

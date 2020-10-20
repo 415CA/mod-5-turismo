@@ -1,6 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
-// import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
@@ -24,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    // backgroundImage: 'url(https://source.unsplash.com/random)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
