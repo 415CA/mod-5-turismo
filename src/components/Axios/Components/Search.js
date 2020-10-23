@@ -62,6 +62,7 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState(false);
   const GOOGLE = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
+
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
 
