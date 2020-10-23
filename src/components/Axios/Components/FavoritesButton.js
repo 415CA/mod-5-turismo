@@ -14,14 +14,14 @@ const FavoritesButton = (destination) => {
 
   const deleteRequest = () => {
     axios
-      .delete(`http://localhost:3000/destinations/${id}`)
+      .delete(`https://turismo-backend-api.herokuapp.com/destinations/${id}`)
       .then((response) => console.log('Delete', response));
     setClick(false);
   };
 
   const postRequest = () => {
     axios
-      .post('http://localhost:3000/destinations', {
+      .post('https://turismo-backend-api.herokuapp.com/destinations', {
         name: name,
         latitude: latitude,
         longitude: longitude,

@@ -9,7 +9,7 @@ const GUARDIAN = process.env.REACT_APP_GUARDIAN;
 
 const articles = (destination) => {
   console.log('articles', destination);
-  return `?q=${destination}&fq=news_desk:("Travel")ANDglocations:(${destination})&api-key=CDKlAZCAyOYClxv6Zmavk4ujwGAWenZk`;
+  return `?q=${destination}&fq=news_desk:("Travel")ANDglocations:(${destination})&api-key=${NYTIMES}`;
 };
 
 const section = (destination) => {
