@@ -18,7 +18,7 @@ const Landing = () => {
 
   var config = {
     method: 'get',
-    url: 'http://localhost:3000/destinations',
+    url: 'https://turismo-backend-api.herokuapp.com/destinations',
   };
 
   useEffect(() => {

@@ -34,7 +34,7 @@ const unsplash = axios.create({
 });
 
 const openWeather = axios.create({
-  baseURL: 'api.openweathermap.org/data/2.5/weather',
+  baseURL: 'https://api.openweathermap.org/data/2.5/weather',
 });
 
 const guardian = axios.create({

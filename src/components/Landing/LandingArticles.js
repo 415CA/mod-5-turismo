@@ -49,7 +49,7 @@ export default function LandingArticles(props) {
 
   let config = {
     method: 'get',
-    url: `http://newsapi.org/v2/everything?q=travel&from&sortBy&apiKey=${NEWSAPI}`,
+    url: `https://newsapi.org/v2/everything?q=travel&from&sortBy&apiKey=${NEWSAPI}`,
   };
 
   useEffect(() => {

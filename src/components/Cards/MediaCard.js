@@ -79,7 +79,7 @@ const MediaCard = (props) => {
 
   const deleteRequest = () => {
     axios
-      .delete(`http://localhost:3000/destinations/${destination.id}`)
+      .delete(`hhttps://turismo-backend-api.herokuapp.com/${destination.id}`)
       .then((response) => console.log('Delete', response));
   };
 

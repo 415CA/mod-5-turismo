@@ -29,7 +29,7 @@ const Weather = () => {
     async function getWeather() {
       const request = await axios
         .get(
-          `api.openweathermap.org/data/2.5/weather?q=${'Brooklyn'},${'NY'}&appid=${API_KEY}`,
+          `https://api.openweathermap.org/data/2.5/weather?q=${'Brooklyn'},${'NY'}&appid=${API_KEY}`,
         )
         .then((display) => {
           setWeather(display.data);
