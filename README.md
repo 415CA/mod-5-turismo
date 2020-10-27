@@ -2,6 +2,8 @@
 
 Turismo is a travel discovery engine providing information about landmarks, experiences, and restaurants for destinations around the globe
 
+[Link to Live Demo](https://turismo-travel.herokuapp.com/)
+
 [Link to Backend API](https://github.com/415CA/turismo-backend)
 
 
